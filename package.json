@@ -1,5 +1,5 @@
 {
-  "name": "nodeserialport",
+  "name": "nodeiotgateway",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -7,9 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "crc": "^3.4.4",
     "serialport": "^4.0.7"
+  },
+  "repository":{
+    "type":"git",
+    "url" : "https://github.com/gnsensors/nodeiotgateway.git"
   }
 }
