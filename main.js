@@ -39,15 +39,33 @@ packetHandler.processPacket = function(){
   //remove the CRC from the array and calculate what we received
   this.databuffer.remove(-4,-1);
 
-  let abuffer = new Uint8Array(this.databuffer);
+  //let abuffer = new Uint8Array(this.databuffer);
+
+  let abuffer = new Buffer(this.databuffer);
+
   let localCRC = crc.crc32(abuffer)
 
   console.log('\tlocal  CRC: ' + localCRC);
-
   console.log('\tremote CRC: ' + remoteCRC );
 
   if( localCRC === remoteCRC){
-    console.log('\tValid Packet, sent to cloud');
+
+    //copy databuffer into new array
+    let x=[];
+    let y=[];
+    let z=[];
+    let i=0;
+    while (i<abuffer.length) {
+      x.push( abuffer.readInt16LE(i));
+
+      i=i+2;
+      y.push( abuffer.readInt16LE(i));
+      i=i+2;
+      z.push( abuffer.readInt16LE(i));
+      i=i+2;
+
+    }
+    console.log('\tValid Packet of length: ' + x.length + ', sent to cloud');
 
   } else {
     console.log('\tbad packet, throw out');
